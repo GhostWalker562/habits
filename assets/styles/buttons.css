@@ -1,0 +1,6 @@
+.primary-button {
+  @apply text-sm md:text-base shadow-salmon bg-salmon text-white px-4 py-1 rounded-full font-display font-semibold;
+  @apply hover:opacity-80 enabled:hover:scale-98 enabled:active:scale-95;
+  @apply transition-all ease-out duration-200;
+  @apply disabled:opacity-50;
+}

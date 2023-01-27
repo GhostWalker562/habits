@@ -6,6 +6,13 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@vueuse/nuxt",
     "@formkit/nuxt",
+    "@nuxtjs/google-fonts",
   ],
   tailwindcss: {},
+  googleFonts: {
+    download: true,
+    families: {
+      Quicksand: true,
+    },
+  },
 });
