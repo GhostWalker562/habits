@@ -1,7 +1,11 @@
 <template>
-  <h1 class="text-3xl text-purple font-display">Momentum</h1>
+  <RouterLink to="/">
+    <h1 class="text-3xl text-purple">Momentum</h1>
+  </RouterLink>
 </template>
 
 <script setup lang="ts"></script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
