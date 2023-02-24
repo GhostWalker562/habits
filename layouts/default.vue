@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-const user = useSupabaseClient();
+const user = useSupabaseUser();
 </script>
 
 <style scoped></style>

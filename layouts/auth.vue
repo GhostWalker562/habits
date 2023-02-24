@@ -1,11 +1,15 @@
 <template>
-    <div>
-    <AuthHeader/>
+  <div>
+    <AuthHeader />
     <slot></slot>
-    </div>
-
+  </div>
 </template>
 
 <script lang="ts" setup>
+const user = useSupabaseUser();
+const router = useRouter();
 
+watch(user, (user) => {
+  if (user) router.push("/dashboard");
+});
 </script>

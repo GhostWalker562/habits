@@ -135,25 +135,27 @@
             </a>
           </nav>
         </div>
-        <!-- <div class="flex flex-shrink-0 border-t border-indigo-800 p-4">
+        <div class="flex flex-shrink-0 border-t p-4">
           <a href="#" class="group block w-full flex-shrink-0">
             <div class="flex items-center">
               <div>
                 <img
                   class="inline-block h-9 w-9 rounded-full"
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  src="https://avatars.githubusercontent.com/u/43276017?v=4"
                   alt=""
                 />
               </div>
               <div class="ml-3">
-                <p class="text-sm font-medium">Tom Cook</p>
-                <p class="text-xs font-medium text-indigo-200 group-hover:">
-                  View profile
-                </p>
+                <p class="text-sm font-medium">John Doe</p>
+                <button @click="logout">
+                  <p class="text-xs font-medium text-indigo-200 group-hover:">
+                    Logout
+                  </p>
+                </button>
               </div>
             </div>
           </a>
-        </div> -->
+        </div>
       </div>
     </div>
     <div class="flex flex-1 flex-col md:pl-64">
@@ -188,19 +190,21 @@ import {
 } from "@headlessui/vue";
 import {
   Bars3Icon,
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
   HomeIcon,
-  InboxIcon,
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/vue/24/outline";
+
+const auth = useSupabaseAuthClient();
 
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
   { name: "Shop", href: "#", icon: UsersIcon, current: false },
 ];
+
+const logout = () => {
+  auth.auth.signOut();
+};
 
 const sidebarOpen = ref(false);
 </script>
