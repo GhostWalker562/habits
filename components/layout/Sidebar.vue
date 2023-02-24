@@ -56,10 +56,10 @@
                   <Logo class="h-8 w-auto" />
                 </div>
                 <nav class="mt-5 space-y-1 px-2">
-                  <a
+                  <NuxtLink
                     v-for="item in navigation"
                     :key="item.name"
-                    :href="item.href"
+                    :to="item.to"
                     :class="[
                       item.current
                         ? 'bg-purple '
@@ -73,7 +73,7 @@
                       aria-hidden="true"
                     />
                     {{ item.name }}
-                  </a>
+                  </NuxtLink>
                 </nav>
               </div>
               <div class="flex flex-shrink-0 border-t border-indigo-800 p-4">
@@ -115,46 +115,47 @@
             <Logo class="h-8 w-auto" />
           </div>
           <nav class="mt-5 flex-1 space-y-1 px-2">
-            <a
+            <NuxtLink
               v-for="item in navigation"
               :key="item.name"
-              :href="item.href"
+              :to="item.to"
               :class="[
                 item.current
                   ? 'bg-salmon/40 text-purple '
-                  : ' hover:bg-purple/10 hover:bg-opacity-75 transition-all',
+                  : ' hover:bg-purple/10 hover:bg-opacity-75 transition-all text-purple/50',
                 'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
               ]"
             >
               <component
                 :is="item.icon"
-                class="mr-3 h-6 w-6 flex-shrink-0 text-purple"
+                class="mr-3 h-6 w-6 flex-shrink-0"
+                :class="[item.current ? 'text-purple' : 'text-purple/50']"
                 aria-hidden="true"
               />
               {{ item.name }}
-            </a>
+            </NuxtLink>
           </nav>
         </div>
         <div class="flex flex-shrink-0 border-t p-4">
-          <a href="#" class="group block w-full flex-shrink-0">
-            <div class="flex items-center">
-              <div>
-                <img
-                  class="inline-block h-9 w-9 rounded-full"
-                  src="https://avatars.githubusercontent.com/u/43276017?v=4"
-                  alt=""
-                />
-              </div>
-              <div class="ml-3">
-                <p class="text-sm font-medium">John Doe</p>
-                <button @click="logout">
-                  <p class="text-xs font-medium text-indigo-200 group-hover:">
-                    Logout
-                  </p>
-                </button>
-              </div>
+          <div class="flex items-center">
+            <div>
+              <img
+                class="inline-block h-9 w-9 rounded-full"
+                src="https://picsum.photos/200/300"
+                alt=""
+              />
             </div>
-          </a>
+            <div class="ml-3">
+              <p class="text-sm font-medium">
+                {{ user!.email ?? "John Doe" }}
+              </p>
+              <button @click="logout">
+                <p class="text-xs font-medium text-indigo-200 group-hover:">
+                  Logout
+                </p>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -195,11 +196,12 @@ import {
   XMarkIcon,
 } from "@heroicons/vue/24/outline";
 
+const user = useSupabaseUser();
 const auth = useSupabaseAuthClient();
 
 const navigation = [
-  { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
-  { name: "Shop", href: "#", icon: UsersIcon, current: false },
+  { name: "Dashboard", to: "/dashboard", icon: HomeIcon, current: true },
+  { name: "Shop", to: "/dashboard", icon: UsersIcon, current: false },
 ];
 
 const logout = () => {
