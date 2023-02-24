@@ -6,6 +6,7 @@ type InsertHabit = {
 };
 
 type HabitResponse = {
+  id: string;
   description: string;
   frequency: number;
   name: string;

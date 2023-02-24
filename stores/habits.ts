@@ -19,6 +19,14 @@ export const useHabitsStore = defineStore("habits", {
         throw error;
       }
     },
+    async deleteHabit(id: string) {
+      try {
+        await HabitService.deleteHabit({ id });
+        this.items = this.items.filter((e) => e.id !== id);
+      } catch (error) {
+        throw error;
+      }
+    },
     async refresh() {
       try {
         const habits = await HabitService.getHabits();

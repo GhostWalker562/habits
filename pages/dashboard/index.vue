@@ -7,12 +7,21 @@
       </NuxtLink>
     </div>
     <div class="mt-4 space-y-4">
-      <div v-for="(e, i) in habits.items" class="bg-salmon/20 p-4 rounded-lg">
-        <h1 class="text-lg text-purple font-bold">
-          {{ e.name }}
-        </h1>
-        <h3>{{ e.description }}</h3>
-      </div>
+      <template v-if="habits.items.length > 0">
+        <DashboardHabitCard v-for="(e, i) in habits.items" :habit="e">
+        </DashboardHabitCard>
+      </template>
+      <template v-else>
+        <div class="center flex-col space-y-8 py-40">
+          <img src="~~/assets/images/lifestyle.png" class="h-40" />
+          <h1 class="text-2xl font-bold">
+            You have no habits. Let's create one!
+          </h1>
+          <NuxtLink to="/habits/create">
+            <button class="primary-button !px-8 !py-2">Create Habit</button>
+          </NuxtLink>
+        </div>
+      </template>
     </div>
   </LayoutRoundedPage>
 </template>
@@ -21,7 +30,6 @@
 import { useHabitsStore } from "~~/stores/habits";
 
 const habits = useHabitsStore();
-const user = useSupabaseClient();
 
 onMounted(() => {
   useHabitsStore().refresh();

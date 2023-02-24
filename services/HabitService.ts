@@ -27,6 +27,15 @@ export class HabitService {
     if (error) throw error;
   }
 
+  static async deleteHabit(props: { id: string }) {
+    const { id } = props;
+
+    const supabase = useSupabaseClient();
+
+    let { error } = await supabase.from("habits").delete().eq("id", id);
+    if (error) throw error;
+  }
+
   static async getHabits(): Promise<HabitResponse[]> {
     const supabase = useSupabaseClient();
     const user = useSupabaseUser();
