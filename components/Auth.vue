@@ -1,6 +1,6 @@
 <template>
-  <div class ="login-container">
-    <div class="center py-20 inline-block">
+  <div class ="login-container justify-center items-center">
+    <div class="center py-20">
     <div class="py-12 px-32 rounded-xl bg-white/60">
       <form class="row flex-center flex" @submit.prevent="handleLogin">
         <div class="space-y-6 col-6 text-center w-full">
@@ -24,9 +24,7 @@
           </div>
         </div>
       </form>
-
     </div>
-
   </div>
   </div>
   
@@ -38,8 +36,6 @@
   background-size: cover;
   background-position: center;
   height: 100vh;
-  justify-content: center;
-  align-items: center;
 }
 </style>
 
