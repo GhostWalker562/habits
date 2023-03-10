@@ -1,5 +1,5 @@
 <template>
-  <div class="center">
+  <div class="center login-container">
     <div class="py-12 px-32 border-2 rounded-xl">
       <form class="row flex-center flex" @submit.prevent="handleLogin">
         <div class="space-y-6 col-6 text-center w-full">
@@ -26,6 +26,18 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+.login-container{
+  background-image: url("../assets/images/Login.png");
+  background-size: cover;
+  background-position: center;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
 
 <script setup lang="ts">
 const supabase = useSupabaseClient();

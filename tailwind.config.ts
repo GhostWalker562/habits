@@ -10,7 +10,10 @@ export default <Partial<Config>>{
       },
       colors: {
         salmon: "#FFC7C7",
-        purple: "#8785A2",
+        purple: {
+          DEFAULT: "#8785A2",
+          600: "#4B3E8C",
+        },
         "light-grey": "#F5F5F5",
       },
       scale: {

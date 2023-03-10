@@ -1,6 +1,6 @@
 <template>
   <RouterLink to="/">
-    <h1 class="text-3xl text-purple">Momentum</h1>
+    <h1 class="text-3xl">Momentum <img src="../assets/images/logo.svg" class="inline-block"></h1>
   </RouterLink>
 </template>
 

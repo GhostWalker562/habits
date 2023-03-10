@@ -23,8 +23,13 @@
           to="/login"
           class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
         >
+<<<<<<< Updated upstream
           Sign in
         </RouterLink>
+=======
+          Login</RouterLink
+        >
+>>>>>>> Stashed changes
         <!-- class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700" -->
 
         <button href="#" class="primary-button ml-8">Sign up</button>
@@ -70,7 +75,7 @@
               <p class="mt-6 text-center text-base font-medium text-gray-500">
                 Existing customer?
                 {{ " " }}
-                <a href="#" class="text-salmon/80 hover:text-salmon">Sign in</a>
+                <a href="#" class="text-purple/80 hover:text-purple-600">Sign in</a>
               </p>
             </div>
           </div>
