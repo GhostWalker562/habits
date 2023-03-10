@@ -1,13 +1,14 @@
 <template>
-  <div class="center login-container">
-    <div class="py-12 px-32 border-2 rounded-xl">
+  <div class ="login-container">
+    <div class="center py-20 inline-block">
+    <div class="py-12 px-32 rounded-xl bg-white/60">
       <form class="row flex-center flex" @submit.prevent="handleLogin">
         <div class="space-y-6 col-6 text-center w-full">
-          <h1 class="header text-4xl text-purple">Welcome Back!</h1>
-          <p class="description text-xl text-purple">Sign in with magic link</p>
+          <h1 class="header text-4xl ">Welcome Back!</h1>
+          <p class="description text-xl">Sign in with magic link</p>
           <div>
             <input
-              class="inputField !py-2 !px-4 border-2 rounded-xl"
+            class="appearance-none border-white border-2 bg-transparent rounded-xl w-full py-2 px-4 leading-tight focus:outline-none focus:border-purple-800 placeholder-slate-700 text-slate-700"
               type="email"
               placeholder="Email"
               v-model="email"
@@ -23,8 +24,12 @@
           </div>
         </div>
       </form>
+
     </div>
+
   </div>
+  </div>
+  
 </template>
 
 <style scoped>
@@ -32,8 +37,7 @@
   background-image: url("../assets/images/Login.png");
   background-size: cover;
   background-position: center;
-  height: 90vh;
-  display: flex;
+  height: 100vh;
   justify-content: center;
   align-items: center;
 }

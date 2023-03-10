@@ -66,7 +66,7 @@
               <p class="mt-6 text-center text-base font-medium text-gray-500">
                 Existing customer?
                 {{ " " }}
-                <a href="#" class="text-salmon/80 hover:text-salmon">Sign in</a>
+                <a href="#" class="text-purple/80 hover:text-purple-600">Sign in</a>
               </p>
             </div>
           </div>
