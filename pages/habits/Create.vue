@@ -7,7 +7,6 @@
         label="Habit Name"
         placeholder="Eating breakfast everyday"
         type="text"
-        disabled
       />
       <InputLabeledMultiline
         v-model="description"
