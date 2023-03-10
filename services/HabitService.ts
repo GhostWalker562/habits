@@ -27,6 +27,34 @@ export class HabitService {
     if (error) throw error;
   }
 
+  static async updateHabit(props: {
+    id: string;
+    name: string;
+    description: string;
+    frequency: number;
+  }) {
+    const { id, name, description, frequency } = props;
+
+    const supabase = useSupabaseClient();
+
+    const update: any = {
+      name: name,
+      description: description,
+      frequency: frequency,
+    };
+
+    let { error } = await supabase
+      .from("habits")
+      .update(
+        update as never,
+        {
+          returning: "minimal",
+        } as any
+      )
+      .eq("id", id);
+    if (error) throw error;
+  }
+
   static async deleteHabit(props: { id: string }) {
     const { id } = props;
 

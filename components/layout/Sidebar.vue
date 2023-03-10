@@ -195,18 +195,34 @@ import {
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/vue/24/outline";
+import { useModal } from "tailvue";
 
 const user = useSupabaseUser();
 const auth = useSupabaseAuthClient();
+const { $modal } = useNuxtApp();
+
+const sidebarOpen = ref(false);
 
 const navigation = [
   { name: "Dashboard", to: "/dashboard", icon: HomeIcon, current: true },
   { name: "Shop", to: "/account-edit", icon: UsersIcon, current: false },
 ];
 
-const logout = () => {
-  auth.auth.signOut();
+const logout = async () => {
+  $modal.show({
+    type: "danger",
+    title: "Are you sure you want to log out?",
+    body: " ",
+    primary: {
+      label: "Log Out",
+      theme: "red",
+      action: () => auth.auth.signOut(),
+    },
+    secondary: {
+      label: "Return",
+      theme: "white",
+      action: () => {},
+    },
+  });
 };
-
-const sidebarOpen = ref(false);
 </script>

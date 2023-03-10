@@ -23,8 +23,8 @@
           to="/login"
           class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
         >
-          Sign in</RouterLink
-        >
+          Sign in
+        </RouterLink>
         <!-- class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700" -->
 
         <button href="#" class="primary-button ml-8">Sign up</button>

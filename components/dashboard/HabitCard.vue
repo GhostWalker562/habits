@@ -6,9 +6,13 @@
       </h1>
       <h3>{{ habit.description }}</h3>
     </div>
-    <button @click="deleteHabit()">
-      {{ !loading ? "Delete" : "Loading..." }}
-    </button>
+    <div class="flex space-x-2">
+      <button @click="editHabit()">Edit</button>
+      <button @click="deleteHabit()">
+        <div v-if="!loading">Delete</div>
+        <div v-else>Deleting...</div>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -19,6 +23,7 @@ import { HabitObject } from "~~/stores/habitsTypes";
 const loading = ref(false);
 
 const habits = useHabitsStore();
+const router = useRouter();
 const props = defineProps<{ habit: HabitObject }>();
 
 const deleteHabit = async () => {
@@ -29,6 +34,10 @@ const deleteHabit = async () => {
     alert(error.error_description || error.message);
   }
   loading.value = false;
+};
+
+const editHabit = async () => {
+  router.push(`/habits/edit/${props.habit.id}`);
 };
 </script>
 

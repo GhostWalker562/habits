@@ -59,7 +59,7 @@
           <div class="py-6 px-5">
             <div class="mt-6">
               <!-- class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700" -->
-              
+
               <a href="#" class="primary-button w-full center !py-4"
                 >Sign up
               </a>

@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@formkit/nuxt",
     "@nuxtjs/google-fonts",
+    "@tailvue/nuxt",
   ],
   tailwindcss: {},
   googleFonts: {

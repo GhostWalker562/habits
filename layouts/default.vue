@@ -1,9 +1,9 @@
 <template>
   <div>
-    <template v-if="!user">
+    <div v-if="!user">
       <AuthHeader />
       <Auth />
-    </template>
+    </div>
     <div v-else>
       <LayoutSidebar>
         <slot />
