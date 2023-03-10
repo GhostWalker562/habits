@@ -12,4 +12,10 @@ type HabitResponse = {
   name: string;
 };
 
-export { InsertHabit, HabitResponse };
+type CompletionResponse = {
+  id: string;
+  habit_id: string;
+  created_at: Date;
+};
+
+export { InsertHabit, HabitResponse, CompletionResponse };

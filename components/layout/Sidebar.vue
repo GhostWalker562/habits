@@ -61,7 +61,7 @@
                     :key="item.name"
                     :to="item.to"
                     :class="[
-                      item.current
+                      item.to == $route.path
                         ? 'bg-purple '
                         : ' hover:bg-purple hover:bg-opacity-75',
                       'group flex items-center px-2 py-2 text-base font-medium rounded-md',
@@ -120,7 +120,7 @@
               :key="item.name"
               :to="item.to"
               :class="[
-                item.current
+                item.to == $route.path
                   ? 'bg-salmon/40 text-purple '
                   : ' hover:bg-purple/10 hover:bg-opacity-75 transition-all text-purple/50',
                 'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
@@ -129,7 +129,9 @@
               <component
                 :is="item.icon"
                 class="mr-3 h-6 w-6 flex-shrink-0"
-                :class="[item.current ? 'text-purple' : 'text-purple/50']"
+                :class="[
+                  item.to == $route.path ? 'text-purple' : 'text-purple/50',
+                ]"
                 aria-hidden="true"
               />
               {{ item.name }}
@@ -139,16 +141,20 @@
         <div class="flex flex-shrink-0 border-t p-4">
           <div class="flex items-center">
             <div>
-              <img
-                class="inline-block h-9 w-9 rounded-full"
-                src="https://picsum.photos/200/300"
-                alt=""
-              />
+              <NuxtLink to="/account">
+                <img
+                  class="inline-block h-9 w-9 rounded-full"
+                  src="https://picsum.photos/200/300"
+                  alt=""
+                />
+              </NuxtLink>
             </div>
-            <div class="ml-3">
-              <p class="text-sm font-medium">
-                {{ user!.email ?? "John Doe" }}
-              </p>
+            <div class="ml-3 flex flex-col items-start">
+              <NuxtLink to="/account">
+                <p class="text-sm font-medium">
+                  {{ user!.email ?? "John Doe" }}
+                </p>
+              </NuxtLink>
               <button @click="logout">
                 <p class="text-xs font-medium text-indigo-200 group-hover:">
                   Logout
@@ -194,9 +200,10 @@ import {
   HomeIcon,
   UsersIcon,
   XMarkIcon,
+  CogIcon,
 } from "@heroicons/vue/24/outline";
-import { useModal } from "tailvue";
 
+const router = useRouter();
 const user = useSupabaseUser();
 const auth = useSupabaseAuthClient();
 const { $modal } = useNuxtApp();
@@ -204,8 +211,9 @@ const { $modal } = useNuxtApp();
 const sidebarOpen = ref(false);
 
 const navigation = [
-  { name: "Dashboard", to: "/dashboard", icon: HomeIcon, current: true },
-  { name: "Shop", to: "/account-edit", icon: UsersIcon, current: false },
+  { name: "Dashboard", to: "/dashboard", icon: HomeIcon },
+  { name: "Shop", to: "/shop", icon: UsersIcon },
+  { name: "Account", to: "/account", icon: CogIcon },
 ];
 
 const logout = async () => {

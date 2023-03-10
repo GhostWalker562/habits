@@ -24,6 +24,13 @@ export const useHabitsStore = defineStore("habits", {
         throw error;
       }
     },
+    isCompleted(id: string) {
+      const habit = this.items.find((e) => e.id === id);
+      if (!habit) return false;
+      return habit.completions.some(
+        (e) => e.toDateString() === new Date().toDateString()
+      );
+    },
     async updateHabit(props: {
       id: string;
       name: string;
@@ -47,10 +54,22 @@ export const useHabitsStore = defineStore("habits", {
         throw error;
       }
     },
+    async completeHabit(id: string) {
+      try {
+        await HabitService.completeHabitForDay(id);
+
+        this.items
+          .find((f) => f.id === id.toString())
+          ?.completions.push(new Date());
+      } catch (error) {
+        throw error;
+      }
+    },
     async refresh() {
       try {
-        const habits = await HabitService.getHabits();
         this.items = [];
+
+        const habits = await HabitService.getHabits();
         habits.forEach((e) => {
           this.items.push({
             ...e,
@@ -58,7 +77,18 @@ export const useHabitsStore = defineStore("habits", {
             completions: [],
           } as HabitObject);
         });
+
+        const completions = await HabitService.getCompletions(
+          habits.map((e) => e.id)
+        );
+
+        completions.forEach((e) => {
+          this.items
+            .find((f) => f.id === e.habit_id.toString())
+            ?.completions.push(new Date(e.created_at));
+        });
       } catch (error) {
+        console.log(error);
         throw error;
       }
     },

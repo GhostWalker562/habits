@@ -4,3 +4,9 @@
   @apply transition-all ease-out duration-200;
   @apply disabled:opacity-50;
 }
+
+.circular-button {
+  @apply text-sm md:text-base shadow-salmon  text-white p-2 rounded-full font-display border-2 border-emerald-500 bg-emerald-300/10 font-semibold;
+  @apply enabled:hover:opacity-80 enabled:hover:scale-95 enabled:active:scale-90;
+  @apply transition-all ease-out duration-200;
+}

@@ -1,4 +1,4 @@
-import { HabitResponse } from "./HabitServiceTypes";
+import { CompletionResponse, HabitResponse } from "./HabitServiceTypes";
 
 export class HabitService {
   static async createHabit(props: {
@@ -53,6 +53,33 @@ export class HabitService {
       )
       .eq("id", id);
     if (error) throw error;
+  }
+
+  static async completeHabitForDay(id: string) {
+    const supabase = useSupabaseClient();
+    const user = useSupabaseUser();
+
+    let { error } = await supabase.from("habit_completions").insert(
+      { habit_id: id, uid: user.value!.id } as any,
+      {
+        returning: "minimal",
+      } as any
+    );
+
+    if (error) throw error;
+  }
+
+  static async getCompletions(id: string[]) {
+    const supabase = useSupabaseClient();
+
+    let { data, error } = await supabase
+      .from("habit_completions")
+      .select("*")
+      .in("habit_id", id);
+
+    if (error) throw error;
+
+    return data as CompletionResponse[];
   }
 
   static async deleteHabit(props: { id: string }) {
