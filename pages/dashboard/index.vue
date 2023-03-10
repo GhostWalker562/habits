@@ -15,19 +15,48 @@
       <template v-else-if="habits.items.length > 0">
         <div class="space-y-4">
           <div class="max-w-2xl grid grid-cols-3 gap-4">
-            <DashboardMetricCard title="Today" :value="uncompletedItems">
+            <DashboardMetricCard
+              title="Today"
+              :value="uncompletedItems"
+              v-motion-slide-left
+            >
               <CalendarDaysIcon />
             </DashboardMetricCard>
-            <DashboardMetricCard title="Finished" :value="completedItems">
+            <DashboardMetricCard
+              title="Finished"
+              :value="completedItems"
+              v-motion-slide-left
+            >
               <CheckCircleIcon />
             </DashboardMetricCard>
-            <DashboardMetricCard title="Points" :value="points">
+            <DashboardMetricCard
+              title="Points"
+              :value="points"
+              v-motion-slide-left
+            >
               <CurrencyDollarIcon />
             </DashboardMetricCard>
           </div>
 
           <div class="space-y-4">
-            <DashboardHabitCard v-for="(e, i) in habits.items" :habit="e" />
+            <DashboardHabitCard
+              v-for="(e, i) in habits.items"
+              :habit="e"
+              v-motion
+              :initial="{
+                scale: 2,
+                y: 100,
+                opacity: 0,
+              }"
+              :enter="{
+                scale: 1,
+                y: 0,
+                opacity: 1,
+                transition: {
+                  delay: 50 * i,
+                },
+              }"
+            />
           </div>
 
           <div>

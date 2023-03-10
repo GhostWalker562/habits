@@ -1,27 +1,34 @@
 <template>
   <LayoutRoundedPage class="flex flex-col">
-    <h1 class="text-4xl font-bold">Create a Habit</h1>
+    <h1 class="text-4xl font-bold" v-motion-slide-top>Create a Habit</h1>
     <div class="flex-1 py-4 space-y-4">
       <InputLabeled
         v-model="name"
+        v-motion-slide-left
         label="Habit Name"
         placeholder="Eating breakfast everyday"
         type="text"
       />
       <InputLabeledMultiline
         v-model="description"
+        v-motion-slide-left
         label="Habit Description"
         placeholder="Eating breakfast everyday refers to the practice of consuming a meal in the morning, typically within a few hours of waking up. This meal is often considered the most important meal of
 ..."
       />
       <InputLabeled
         v-model="frequency"
+        v-motion-slide-left
         label="Frequency (out of 7 days)"
         placeholder="2"
         type="number"
       />
     </div>
-    <button class="primary-button !px-8 !py-2 w-fit" @click="createHabit">
+    <button
+      class="primary-button !px-8 !py-2 w-fit"
+      @click="createHabit"
+      v-motion-slide-bottom
+    >
       <h3 v-if="!loading">Save and Create</h3>
       <div v-else>...</div>
     </button>

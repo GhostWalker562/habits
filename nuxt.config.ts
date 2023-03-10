@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@formkit/nuxt",
     "@nuxtjs/google-fonts",
     "@tailvue/nuxt",
+    "@vueuse/motion/nuxt",
   ],
   tailwindcss: {},
   googleFonts: {

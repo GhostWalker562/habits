@@ -3,9 +3,9 @@
     <div
       class="flex items-center justify-between p-6 md:justify-start md:space-x-10"
     >
-      <div class="flex justify-start lg:w-0 lg:flex-1">
+      <div class="flex justify-start lg:w-0 lg:flex-1" v-motion-slide-top>
         <a href="#">
-          <span class="sr-only">Your Company</span>
+          <span class="sr-only">Momentum</span>
           <Logo class="h-8 w-auto sm:h-10" />
         </a>
       </div>
@@ -22,12 +22,15 @@
         <RouterLink
           to="/login"
           class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+          v-motion-slide-top
         >
           Login
         </RouterLink>
         <!-- class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700" -->
 
-        <button href="#" class="primary-button ml-8">Sign up</button>
+        <button href="#" class="primary-button ml-8" v-motion-slide-top>
+          Sign up
+        </button>
       </div>
     </div>
 

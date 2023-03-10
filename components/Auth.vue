@@ -1,37 +1,38 @@
 <template>
-  <div class ="login-container justify-center items-center">
+  <div class="login-container justify-center items-center">
     <div class="center py-20">
-    <div class="py-12 px-32 rounded-xl bg-white/60">
-      <form class="row flex-center flex" @submit.prevent="handleLogin">
-        <div class="space-y-6 col-6 text-center w-full">
-          <h1 class="header text-4xl ">Welcome Back!</h1>
-          <p class="description text-xl">Sign in with magic link</p>
-          <div>
-            <input
-            class="appearance-none border-white border-2 bg-transparent rounded-xl w-full py-2 px-4 leading-tight focus:outline-none focus:border-purple-800 placeholder-slate-700 text-slate-700"
-              type="email"
-              placeholder="Email"
-              v-model="email"
-            />
+      <div class="py-12 px-32 rounded-xl bg-white/60">
+        <form class="row flex-center flex" @submit.prevent="handleLogin">
+          <div class="space-y-6 col-6 text-center w-full">
+            <h1 class="header text-4xl" v-motion-slide-top>Welcome Back!</h1>
+            <p class="description text-xl" v-motion-slide-top>
+              Sign in with magic link
+            </p>
+            <div v-motion-slide-top>
+              <input
+                class="appearance-none border-white border-2 bg-transparent rounded-xl w-full py-2 px-4 leading-tight focus:outline-none focus:border-purple-800 placeholder-slate-700 text-slate-700"
+                type="email"
+                placeholder="Email"
+                v-model="email"
+              />
+            </div>
+            <div v-motion-slide-top>
+              <input
+                type="submit"
+                class="primary-button my-4 !py-2 !px-4 !text-xl"
+                :value="loading ? 'Loading' : 'Login via email'"
+                :disabled="loading"
+              />
+            </div>
           </div>
-          <div>
-            <input
-              type="submit"
-              class="primary-button my-4 !py-2 !px-4 !text-xl"
-              :value="loading ? 'Loading' : 'Login via email'"
-              :disabled="loading"
-            />
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-  </div>
-  
 </template>
 
 <style scoped>
-.login-container{
+.login-container {
   background-image: url("../assets/images/Login.png");
   background-size: cover;
   background-position: center;
