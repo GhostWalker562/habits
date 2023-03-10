@@ -1,5 +1,9 @@
 <template>
-  <div class="bg-salmon/20 p-4 rounded-lg flex justify-between">
+  <div
+    @click="editHabit"
+    class="bg-salmon/20 p-4 rounded-lg flex justify-between transition-all hover:scale-98 active:scale-95 cursor-pointer"
+    :class="[isCompleted ? '!bg-emerald-500/30' : '']"
+  >
     <div>
       <h1 class="text-lg text-purple font-bold">
         {{ habit.name }}
@@ -10,12 +14,11 @@
       <button
         v-if="!loading"
         @click="completeHabit"
-        class="circular-button aspect-square"
+        class="circular-button aspect-square h-8 w-8"
         :disabled="loading || isCompleted"
-        :class="[isCompleted ? '!bg-emerald-500' : '']"
+        :class="[isCompleted ? 'hidden' : '']"
       >
-        <CheckIcon v-if="isCompleted" class="w-6 h-6" />
-        <div v-else class="w-6 h-6"></div>
+        <div v-if="isCompleted" class="w-8 h-8" />
       </button>
       <div v-else>Completing...</div>
     </div>
@@ -39,16 +42,6 @@ const completeHabit = async () => {
   loading.value = true;
   try {
     await habits.completeHabit(props.habit.id);
-  } catch (error: any) {
-    alert(error.error_description || error.message);
-  }
-  loading.value = false;
-};
-
-const deleteHabit = async () => {
-  loading.value = true;
-  try {
-    await habits.deleteHabit(props.habit.id);
   } catch (error: any) {
     alert(error.error_description || error.message);
   }

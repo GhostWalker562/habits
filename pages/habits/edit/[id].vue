@@ -21,10 +21,19 @@
         type="number"
       />
     </div>
-    <button class="primary-button !px-8 !py-2 w-fit" @click="editHabit">
-      <h3 v-if="!loading">Save and Edit</h3>
-      <div v-else>...</div>
-    </button>
+    <div class="flex space-x-2">
+      <button
+        class="primary-button !px-8 !py-2 w-fit !bg-red-600/50"
+        @click="deleteHabit"
+      >
+        <h3 v-if="!loading">Delete</h3>
+        <div v-else>...</div>
+      </button>
+      <button class="primary-button !px-8 !py-2 w-fit" @click="editHabit">
+        <h3 v-if="!loading">Save and Edit</h3>
+        <div v-else>...</div>
+      </button>
+    </div>
   </LayoutRoundedPage>
 </template>
 
@@ -72,6 +81,16 @@ const editHabit = async () => {
     router.push("/dashboard");
   } catch (error: any) {
     console.log(error);
+    alert(error.error_description || error.message);
+  }
+  loading.value = false;
+};
+
+const deleteHabit = async () => {
+  loading.value = true;
+  try {
+    await habits.deleteHabit(habitId.value);
+  } catch (error: any) {
     alert(error.error_description || error.message);
   }
   loading.value = false;
