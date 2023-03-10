@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog
         as="div"
@@ -87,7 +87,9 @@
                       />
                     </div>
                     <div class="ml-3">
-                      <p class="text-base font-medium">Anon</p>
+                      <p class="text-base font-medium">
+                        {{ user?.user_metadata.username }}
+                      </p>
                       <p
                         class="text-sm font-medium text-indigo-200 group-hover:"
                       >
@@ -109,7 +111,7 @@
     <!-- Static sidebar for desktop -->
     <div class="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
-      <div class="flex min-h-0 flex-1 flex-col bg-light-grey">
+      <div class="flex min-h-0 flex-1 flex-col bg-purple-500/20">
         <div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
           <div class="flex flex-shrink-0 items-center px-4">
             <Logo class="h-8 w-auto" />
@@ -152,11 +154,13 @@
             <div class="ml-3 flex flex-col items-start">
               <NuxtLink to="/account">
                 <p class="text-sm font-medium">
-                  {{ user!.email ?? "John Doe" }}
+                  {{
+                    user?.user_metadata.username ?? user!.email ?? "John Doe"
+                  }}
                 </p>
               </NuxtLink>
               <button @click="logout">
-                <p class="text-xs font-medium text-indigo-200 group-hover:">
+                <p class="text-xs font-medium text-indigo-400 group-hover:">
                   Logout
                 </p>
               </button>
@@ -179,7 +183,7 @@
         </button>
       </div>
       <main class="flex-1">
-        <div class="w-full h-screen bg-light-grey p-4">
+        <div class="w-full h-screen bg-purple-500/20 p-4">
           <slot />
         </div>
       </main>
@@ -212,7 +216,6 @@ const sidebarOpen = ref(false);
 
 const navigation = [
   { name: "Dashboard", to: "/dashboard", icon: HomeIcon },
-  { name: "Shop", to: "/shop", icon: UsersIcon },
   { name: "Account", to: "/account", icon: CogIcon },
 ];
 

@@ -4,11 +4,12 @@
     <input
       :value="modelValue"
       :type="type"
-      class="border py-2 px-4 rounded-md max-w-lg w-full"
+      class="border py-2 px-4 rounded-md max-w-lg w-full text-black disabled:text-white"
       :placeholder="placeholder"
       @input="
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
       "
+      :disabled="disabled ?? false"
     />
   </div>
 </template>
@@ -19,6 +20,7 @@ defineProps<{
   placeholder: string;
   type?: string;
   modelValue?: string;
+  disabled?: boolean;
 }>();
 defineEmits(["update:modelValue"]);
 </script>

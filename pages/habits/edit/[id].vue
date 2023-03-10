@@ -23,9 +23,12 @@
     </div>
     <div class="flex space-x-2">
       <button
-        class="primary-button !px-8 !py-2 w-fit !bg-red-600/50"
-        @click="deleteHabit"
+        class="primary-button !px-8 !py-2 w-fit"
+        @click="$router.push('/dashboard')"
       >
+        Return
+      </button>
+      <button class="primary-button !px-8 !py-2 w-fit" @click="deleteHabit">
         <h3 v-if="!loading">Delete</h3>
         <div v-else>...</div>
       </button>
@@ -39,6 +42,8 @@
 
 <script setup lang="ts">
 import { useHabitsStore } from "~~/stores/habits";
+
+const { $modal } = useNuxtApp();
 
 const habits = useHabitsStore();
 const route = useRoute();
@@ -86,14 +91,36 @@ const editHabit = async () => {
   loading.value = false;
 };
 
+const deleteHabitAndRoute = async () => {
+  try {
+    await habits.deleteHabit(habitId.value);
+    router.push("/dashboard");
+  } catch (error) {
+    console.log(error);
+  }
+  loading.value = false;
+};
+
 const deleteHabit = async () => {
   loading.value = true;
   try {
-    await habits.deleteHabit(habitId.value);
+    $modal.show({
+      title: "Delete Habit",
+      body: "Are you sure you want to delete this habit?",
+      primary: {
+        label: "Delete",
+        action: deleteHabitAndRoute,
+        theme: "red",
+      },
+      secondary: {
+        label: "Cancel",
+        action: () => {},
+        theme: "white",
+      },
+    });
   } catch (error: any) {
     alert(error.error_description || error.message);
   }
-  loading.value = false;
 };
 
 onMounted(() => {

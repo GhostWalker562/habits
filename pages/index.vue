@@ -11,6 +11,7 @@
       <img src="../assets/images/Vector.svg" />
     </div>
 </template>
+
 <script setup lang="ts">
 definePageMeta({
   layout: "landing",

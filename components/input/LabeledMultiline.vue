@@ -3,7 +3,7 @@
     <h3 class="font-medium mb-2">{{ label }}</h3>
     <textarea
       :value="modelValue"
-      class="border py-2 px-4 rounded-md max-w-lg w-full"
+      class="border py-2 px-4 rounded-md max-w-lg w-full text-black"
       :placeholder="placeholder"
       :rows="5"
       @input="

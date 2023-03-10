@@ -87,8 +87,18 @@ export class HabitService {
 
     const supabase = useSupabaseClient();
 
-    let { error } = await supabase.from("habits").delete().eq("id", id);
-    if (error) throw error;
+    let { error: habitCompletionError } = await supabase
+      .from("habit_completions")
+      .delete()
+      .eq("habit_id", id);
+
+    if (habitCompletionError) throw habitCompletionError;
+
+    let { error: habitError } = await supabase
+      .from("habits")
+      .delete()
+      .eq("id", id);
+    if (habitError) throw habitError;
   }
 
   static async getHabits(): Promise<HabitResponse[]> {

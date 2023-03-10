@@ -15,6 +15,7 @@ export default <Partial<Config>>{
           600: "#4B3E8C",
         },
         "light-grey": "#F5F5F5",
+        surface: "#2E2E2E",
       },
       scale: {
         99: "0.99",

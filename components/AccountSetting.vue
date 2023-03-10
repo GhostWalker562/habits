@@ -1,92 +1,106 @@
 <script setup lang="ts">
-const supabase = useSupabaseClient()
-const loading = ref(true)
-const username = ref('null')
+const supabase = useSupabaseClient();
+const loading = ref(true);
+const username = ref("null");
+const email = ref<string | undefined>("");
 
-const user = useSupabaseUser()
+const user = useSupabaseUser();
 
 async function fetchProfile() {
-  loading.value = true
-  if (user.value == null) return ("User does not exist")
+  loading.value = true;
+  if (user.value == null) return "User does not exist";
   const { data, error } = await supabase
-    .from('profiles')
+    .from("profiles")
     .select(`username`)
-    .eq('id', user.value.id)
-    .single()
+    .eq("id", user.value.id)
+    .single();
 
   if (error) {
-    alert(error.message)
+    alert(error.message);
   } else {
-    username.value = data?.username || ''
+    username.value = data?.username || "";
+    email.value = user.value.email;
   }
 
-  loading.value = false
+  loading.value = false;
 }
 
-fetchProfile()
-
+fetchProfile();
 
 async function updateProfile() {
   try {
-    loading.value = true
-    if (user.value == null) return ("Not existent user")
+    loading.value = true;
+    if (user.value == null) return "Not existent user";
 
-    const updates: any = [{
-      id: user.value.id,
-      username: username.value,
-      updated_at: new Date(),
-    }];
+    const updates: any = [
+      {
+        id: user.value.id,
+        username: username.value,
+        updated_at: new Date(),
+      },
+    ];
 
-    let { error } = await supabase.from('profiles').upsert(updates, {
-    })
+    let { error } = await supabase.from("profiles").upsert(updates, {});
 
     if (error) {
-      throw error
+      throw error;
     } else {
-      alert('Profile updated successfully')
+      alert("Profile updated successfully");
     }
   } catch (error: any) {
-    alert(error.message)
+    alert(error.message);
   } finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 
 async function signOut() {
   try {
-    loading.value = true
-    const { error } = await supabase.auth.signOut()
+    loading.value = true;
+    const { error } = await supabase.auth.signOut();
 
     if (error) {
-      throw error
+      throw error;
     } else {
-      user.value = null
+      user.value = null;
     }
   } catch (error: any) {
-    alert(error.message)
+    alert(error.message);
   } finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 </script>
 
 <template>
-  <form class="form-widget" @submit.prevent="updateProfile">
-    <div>
-      <label for="email">Email</label>
-      <input id="email" type="text" :value="user ? user.email : ''" disabled />
-    </div>
-    <div>
-      <label for="username">Username</label>
-      <input id="username" type="text" v-model="username" />
-    </div>
+  <LayoutRoundedPage>
+    <div class="h-full">
+      <form class="form-widget space-y-8" @submit.prevent="updateProfile">
+        <InputLabeled
+          v-model="email"
+          label="Email"
+          placeholder="Email"
+          disabled
+        />
+        <InputLabeled
+          v-model="username"
+          label="Username"
+          placeholder="Username"
+        />
 
-    <div>
-      <input type="submit" class="button primary block" :value="loading ? 'Loading ...' : 'Update'" :disabled="loading" />
-    </div>
+        <input
+          class="primary-button !px-12 !py-3"
+          type="submit"
+          :value="loading ? 'Loading ...' : 'Update'"
+          :disabled="loading"
+        />
 
-    <div>
-      <button class="button block" @click="signOut" :disabled="loading">Sign Out</button>
+        <div>
+          <button class="button block" @click="signOut" :disabled="loading">
+            Sign Out
+          </button>
+        </div>
+      </form>
     </div>
-  </form>
+  </LayoutRoundedPage>
 </template>

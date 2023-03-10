@@ -1,12 +1,15 @@
 import { defineStore } from "pinia";
 import { HabitService } from "~~/services/HabitService";
+import { PointService } from "~~/services/PointService";
 import { HabitObject } from "./habitsTypes";
 
 export const useHabitsStore = defineStore("habits", {
   state: (): {
     items: HabitObject[];
+    points: number;
   } => ({
     items: [],
+    points: 0,
   }),
   actions: {
     getHabit(id: string) {
@@ -61,6 +64,10 @@ export const useHabitsStore = defineStore("habits", {
         this.items
           .find((f) => f.id === id.toString())
           ?.completions.push(new Date());
+
+        await PointService.incrementPoint();
+
+        this.points++;
       } catch (error) {
         throw error;
       }
@@ -87,6 +94,8 @@ export const useHabitsStore = defineStore("habits", {
             .find((f) => f.id === e.habit_id.toString())
             ?.completions.push(new Date(e.created_at));
         });
+
+        this.points = await PointService.getPoints();
       } catch (error) {
         console.log(error);
         throw error;
