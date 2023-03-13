@@ -3,24 +3,24 @@ export function findMostRecentConsecutiveDays(dates: Date[]): number {
     return 0;
   }
 
-  dates.sort((a, b) => a.getTime() - b.getTime());
+  let currentStreak = 1;
 
-  let mostRecentConsecutiveDays = 1;
-  let consecutiveDays = 1;
+  for (let i = dates.length - 1; i > 0; i--) {
+    const prevDate = dates[i - 1];
+    const currDate = dates[i];
+    const prevTime = prevDate.getTime();
+    const currTime = currDate.getTime();
 
-  for (let i = 1; i < dates.length; i++) {
-    const diffInDays =
-      (dates[i].getTime() - dates[i - 1].getTime()) / (1000 * 60 * 60 * 24);
-
-    if (diffInDays <= 1) {
-      consecutiveDays++;
-      mostRecentConsecutiveDays = consecutiveDays;
+    if (currTime - prevTime === 24 * 60 * 60 * 1000) {
+      // Dates are consecutive
+      currentStreak++;
     } else {
-      consecutiveDays = 1;
+      // Dates are not consecutive
+      break;
     }
   }
 
-  return mostRecentConsecutiveDays;
+  return currentStreak;
 }
 
 export function getDatesInCurrentWeek(dates: Date[]): Date[] {
