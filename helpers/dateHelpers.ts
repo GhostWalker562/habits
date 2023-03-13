@@ -3,6 +3,7 @@ export function findMostRecentConsecutiveDays(dates: Date[]): number {
     return 0;
   }
 
+  const today = new Date();
   let currentStreak = 1;
 
   for (let i = dates.length - 1; i > 0; i--) {
@@ -18,6 +19,17 @@ export function findMostRecentConsecutiveDays(dates: Date[]): number {
       // Dates are not consecutive
       break;
     }
+  }
+
+  // Check if today's date is part of the streak
+  const lastDate = dates[dates.length - 1];
+  const lastTime = lastDate.getTime();
+  const todayTime = today.getTime();
+
+  if (todayTime - lastTime === 24 * 60 * 60 * 1000) {
+    currentStreak++;
+  } else {
+    currentStreak = 1;
   }
 
   return currentStreak;
